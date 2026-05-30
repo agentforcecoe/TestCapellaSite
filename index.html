@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Capella Scroll Effect</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* HERO (VIDEO BACKGROUND - FIXED) */
+#masthead {
+  position: fixed;   /* ✅ important */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* VIDEO */
+.videofill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+/* LOGO CENTER */
+#masthead_logo {
+  width: 250px;
+  height: 250px;
+  background: url('capellalogowhite.png') center no-repeat;
+  background-size: contain;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* SCROLL ARROW */
+.scroll-arrow {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  background: url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg') no-repeat center;
+  background-size: contain;
+
+  animation: bounce 2s infinite;
+  z-index: 10;
+}
+
+/* ARROW ANIMATION */
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+/* NEXT SECTION (OVERLAY) */
+#next-section {
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh;
+  background: #f8f8f6;
+  height: auto;
+  display: block;
+}
+
+/* WRAPPER */
+.content-wrapper {
+  max-width: 100%;
+  margin: 1rem;
+}
+
+/* TITLE */
+.title {
+  font-size: 42px;
+  letter-spacing: 3px;
+  margin-bottom: 60px;
+}
+
+/* TEXT ROW */
+.text-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+}
+
+/* LEFT TEXT */
+.left-text {
+  width: 40%;
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+/* RIGHT TEXT */
+.right-text {
+  width: 40%;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+}
+
+.right-text a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  border-bottom: 1px solid black;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* IMAGE GRID */
+.image-grid {
+  display: flex;
+  gap: 40px;
+}
+
+/* LARGE IMAGE */
+.large-img {
+  width: 65%;
+  height: auto;
+}
+
+/* SMALL IMAGE */
+.small-img {
+  width: 30%;
+  height: auto;
+  margin-top: 80px;
+}
+.headerOfPage{
+  width: 100%;
+  height: 4.2rem;
+  border-bottom: 2px solid #D3D3D3;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  font-family: calibre;
+  vertical-align: middle;
+}
+
+/* ── CAPELLA PAGE STYLES ── */
+:root {
+  --cream: #FAF8F5;
+  --dark: #2C2822;
+  --mid: #6B6560;
+  --light-text: #9A948E;
+  --border: #E2DDD7;
+}
+.cap-body { font-family: 'Montserrat', sans-serif; color: var(--dark); font-size: 13px; letter-spacing: 0.02em; }
+
+.top-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 100; }
+.top-bar-left { font-size: 11px; font-weight: 400; letter-spacing: 0.1em; color: var(--mid); text-transform: uppercase; cursor: pointer; }
+.nav-logo { position: absolute; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dark); white-space: nowrap; }
+.top-bar-right { display: flex; align-items: center; gap: 20px; }
+.nav-link-top { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dark); text-decoration: none; cursor: pointer; font-weight: 400; transition: opacity 0.2s; }
+.nav-link-top:hover { opacity: 0.5; }
+.nav-link-top.active { border: 1px solid var(--dark); padding: 6px 12px; }
+.btn-book { background: var(--dark); color: #fff; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 22px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
+.btn-book:hover { background: #444; }
+
+.sec-nav { display: flex; align-items: center; justify-content: center; gap: 36px; padding: 14px 40px; border-bottom: 1px solid var(--border); background: #fff; flex-wrap: wrap; }
+.sec-nav a { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark); text-decoration: none; font-weight: 400; cursor: pointer; transition: opacity 0.2s; }
+.sec-nav a:hover { opacity: 0.5; }
+
+.pale-banner { background: #F3EDE6; height: 8px; }
+
+.hero-section { padding: 80px 120px 60px; max-width: 1400px; margin: 0 auto; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dark); margin-bottom: 60px; }
+.hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; font-style: italic; color: var(--mid); line-height: 1.5; }
+.hero-description { font-size: 13px; line-height: 1.9; color: var(--mid); font-weight: 300; }
+.resort-link { display: inline-block; margin-top: 28px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px; cursor: pointer; transition: opacity 0.2s; }
+.resort-link:hover { opacity: 0.5; }
+
+.gallery-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light-text); padding: 0 120px; margin-bottom: 16px; }
+.gallery-main { display: grid; grid-template-columns: 2fr 1fr; }
+.gallery-side { display: flex; flex-direction: column; }
+
+.img-aerial   { background: linear-gradient(135deg,#8B9B7A 0%,#6B8B5A 40%,#4A7A6A 70%,#3A6B8A 100%); }
+.img-room     { background: linear-gradient(135deg,#C8B89A 0%,#A89070 50%,#887050 100%); }
+.img-pool     { background: linear-gradient(135deg,#7AABB8 0%,#5A8A98 50%,#3A6A78 100%); }
+.img-room1    { background: linear-gradient(135deg,#C5B8A0 0%,#A89878 60%,#887050 100%); }
+.img-room2    { background: linear-gradient(135deg,#B8C5B8 0%,#90A890 60%,#708070 100%); }
+.img-room3    { background: linear-gradient(135deg,#C0B8C8 0%,#9890A8 60%,#786878 100%); }
+.img-dining   { background: linear-gradient(160deg,#8B6A50 0%,#6A5038 60%,#4A3020 100%); }
+.img-wellness { background: linear-gradient(160deg,#7AB8B8 0%,#5A9898 60%,#3A7878 100%); }
+.img-culture  { background: linear-gradient(160deg,#B8A870 0%,#988050 60%,#786030 100%); }
+.img-events   { background: linear-gradient(160deg,#C8A8B0 0%,#A88090 60%,#886070 100%); }
+
+.photo-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.photo-ph span { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.38); letter-spacing: 0.2em; text-transform: uppercase; }
+.img-overflow { width: 100%; overflow: hidden; }
+.img-scale { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.img-overflow:hover .img-scale { transform: scale(1.04); }
+
+.feature-section { max-width: 1400px; margin: 0 auto; padding: 80px 120px; }
+.feature-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+.feature-grid.rev { direction: rtl; }
+.feature-grid.rev > * { direction: ltr; }
+.feature-content { padding: 60px; }
+.feature-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--light-text); margin-bottom: 20px; }
+.feature-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; line-height: 1.2; color: var(--dark); margin-bottom: 24px; letter-spacing: 0.04em; }
+.feature-desc { font-size: 13px; line-height: 1.9; color: var(--mid); font-weight: 300; margin-bottom: 28px; }
+.feature-link { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px; cursor: pointer; transition: opacity 0.2s; }
+.feature-link:hover { opacity: 0.5; }
+
+.rooms-strip { background: var(--cream); padding: 80px 120px; }
+.rooms-strip-inner { max-width: 1400px; margin: 0 auto; }
+.strip-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 50px; }
+.strip-title { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; letter-spacing: 0.05em; color: var(--dark); }
+.strip-link { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dark); text-decoration: none; border-bottom: 1px solid var(--dark); padding-bottom: 2px; cursor: pointer; transition: opacity 0.2s; }
+.strip-link:hover { opacity: 0.5; }
+.rooms-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.room-card { cursor: pointer; }
+.room-img { width: 100%; height: 240px; overflow: hidden; margin-bottom: 20px; }
+.room-img-inner { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.room-card:hover .room-img-inner { transform: scale(1.04); }
+.room-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--dark); margin-bottom: 8px; letter-spacing: 0.04em; }
+.room-size { font-size: 11px; color: var(--light-text); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+.room-desc { font-size: 12px; line-height: 1.8; color: var(--mid); font-weight: 300; }
+
+.experiences-section { padding: 80px 120px; max-width: 1400px; margin: 0 auto; }
+.exp-header { text-align: center; margin-bottom: 60px; }
+.exp-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--light-text); margin-bottom: 16px; }
+.exp-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--dark); letter-spacing: 0.05em; }
+.exp-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.exp-card { position: relative; overflow: hidden; cursor: pointer; }
+.exp-card-img { width: 100%; height: 380px; transition: transform 0.6s ease; }
+.exp-card:hover .exp-card-img { transform: scale(1.05); }
+.exp-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 24px 28px; background: linear-gradient(to top,rgba(20,15,10,.75) 0%,transparent 100%); }
+.exp-card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #fff; letter-spacing: 0.06em; margin-bottom: 6px; }
+.exp-card-sub { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+
+.full-banner { height: 480px; background: linear-gradient(160deg,#3A4A3A 0%,#2A3A4A 50%,#1A2A3A 100%); display: flex; align-items: center; justify-content: center; text-align: center; }
+.full-banner-eyebrow { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 20px; }
+.full-banner-title { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: #fff; letter-spacing: 0.1em; margin-bottom: 32px; }
+.btn-white { display: inline-block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; border: 1px solid rgba(255,255,255,.5); padding: 14px 36px; text-decoration: none; cursor: pointer; transition: background 0.3s, border-color 0.3s; }
+.btn-white:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+.cap-footer { background: var(--dark); color: rgba(255,255,255,.55); padding: 64px 120px 40px; }
+.footer-inner { max-width: 1400px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; margin-bottom: 16px; }
+.footer-tagline { font-size: 12px; line-height: 1.8; font-weight: 300; }
+.footer-col-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,.8); margin-bottom: 20px; font-weight: 500; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,.5); text-decoration: none; cursor: pointer; font-weight: 300; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,.9); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.3); }
+.footer-bottom-links { display: flex; gap: 24px; }
+.footer-bottom-links a { font-size: 11px; color: rgba(255,255,255,.3); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,.6); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+<div id="masthead">
+  
+  <video autoplay loop muted playsinline class="videofill">
+    <source src="capellawebsitevideo.mp4" type="video/mp4">
+  </video>
+
+  <div id="masthead_logo"></div>
+
+  <!-- ARROW -->
+  <div class="scroll-arrow" onclick="scrollToNext()"></div>
+
+</div>
+
+<!-- NEXT SECTION -->
+<div id="next-section">
+  <div class="cap-body">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="top-bar-left">ENGLISH &#9662;</div>
+      <div class="nav-logo">&#10022; &nbsp; CAPELLA HOTELS &amp; RESORTS &nbsp; &#10022;</div>
+      <nav class="top-bar-right">
+        <a class="nav-link-top" href="#">DESTINATIONS</a>
+        <a class="nav-link-top active" href="#">EXPERIENCES</a>
+        <a class="btn-book" href="#">BOOK YOUR STAY</a>
+      </nav>
+    </header>
+
+    <!-- SEC NAV -->
+    <nav class="sec-nav">
+      <a href="#">CULTURE</a>
+      <a href="#">FAMILY &amp; PETS</a>
+      <a href="#">ACCOMMODATION</a>
+      <a href="#">MANORS</a>
+      <a href="#">DINING</a>
+      <a href="#">WELLNESS</a>
+      <a href="#">WEDDINGS &amp; EVENTS</a>
+      <a href="#">OFFERS</a>
+      <a href="#">GIFTS</a>
+    </nav>
+
+    <div class="pale-banner"></div>
+
+    <!-- HERO TEXT -->
+    <section class="hero-section">
+      <h1 class="hero-title reveal">CAPELLA SINGAPORE</h1>
+      <div class="hero-content reveal">
+        <div class="hero-tagline">Between the sky and the sea. Press pause.</div>
+        <div>
+          <p class="hero-description">Just over 10 minutes from the central area of Singapore, our Sentosa Island escape offers a tranquil retreat steeped in history. At its heart are two restored Tanah Merah colonial bungalows dating back to the 1880s, from which the hotel extends into gardens and grounds framed by the sea. Inspired by Tanah Merah's Malay translation red earth, architects Foster + Partners designed this resort to sit in harmony with the traditional architecture and the beautiful surrounding environment.</p>
+          <a class="resort-link" href="#">RESORT EXPERIENCES</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="reveal">
+      <p class="gallery-label">CAPELLA SINGAPORE</p>
+      <div class="gallery-main">
+        <div class="img-overflow" style="height:500px;">
+          <div class="img-aerial img-scale photo-ph"><span>Sentosa Island</span></div>
+        </div>
+        <div class="gallery-side">
+          <div class="img-overflow" style="height:250px;">
+            <div class="img-room img-scale photo-ph"><span>Colonial Heritage</span></div>
+          </div>
+          <div class="img-overflow" style="height:250px;">
+            <div class="img-pool img-scale photo-ph"><span>Infinity Pool</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE: ACCOMMODATION -->
+    <section class="feature-section reveal">
+      <div class="feature-grid">
+        <div class="img-overflow" style="height:420px;">
+          <div class="img-room1 img-scale photo-ph"><span>Suite Interior</span></div>
+        </div>
+        <div class="feature-content">
+          <p class="feature-eyebrow">ACCOMMODATION</p>
+          <h2 class="feature-title">Suites &amp; Villas<br>of Distinction</h2>
+          <p class="feature-desc">Each of our 112 suites and villas has been thoughtfully designed to blend Foster + Partners' contemporary vision with the colonial grandeur of Sentosa Island. Floor-to-ceiling windows frame lush tropical gardens, while curated local artworks celebrate Singapore's rich cultural tapestry.</p>
+          <a class="feature-link" href="#">EXPLORE ROOMS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROOMS STRIP -->
+    <div class="rooms-strip">
+      <div class="rooms-strip-inner">
+        <div class="strip-header reveal">
+          <h2 class="strip-title">Our Accommodations</h2>
+          <a class="strip-link" href="#">VIEW ALL ROOMS</a>
+        </div>
+        <div class="rooms-grid reveal">
+          <div class="room-card">
+            <div class="room-img"><div class="img-room1 photo-ph room-img-inner"><span>Garden Suite</span></div></div>
+            <p class="room-name">Garden Suite</p>
+            <p class="room-size">68 SQM &middot; GARDEN VIEW</p>
+            <p class="room-desc">Nestled among lush tropical gardens, these suites offer a serene sanctuary with private terraces opening to verdant surroundings.</p>
+          </div>
+          <div class="room-card">
+            <div class="room-img"><div class="img-room2 photo-ph room-img-inner"><span>Seaview Suite</span></div></div>
+            <p class="room-name">Seaview Suite</p>
+            <p class="room-size">82 SQM &middot; SEA VIEW</p>
+            <p class="room-desc">Panoramic vistas of the South China Sea unfold from the generous terrace of these elevated suites, offering an uninterrupted connection to the horizon.</p>
+          </div>
+          <div class="room-card">
+            <div class="room-img"><div class="img-room3 photo-ph room-img-inner"><span>Manor Suite</span></div></div>
+            <p class="room-name">Manor Suite</p>
+            <p class="room-size">120 SQM &middot; COLONIAL MANOR</p>
+            <p class="room-desc">Housed within the restored 1880s Tanah Merah bungalows, these landmark suites preserve the original colonial architecture alongside refined contemporary comforts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE: WELLNESS -->
+    <section class="feature-section reveal">
+      <div class="feature-grid rev">
+        <div class="img-overflow" style="height:420px;">
+          <div class="img-pool img-scale photo-ph"><span>Auriga Spa</span></div>
+        </div>
+        <div class="feature-content">
+          <p class="feature-eyebrow">WELLNESS</p>
+          <h2 class="feature-title">Auriga Spa &amp;<br>Wellbeing</h2>
+          <p class="feature-desc">Guided by the cycles of the moon, Auriga Spa creates bespoke journeys of restoration using indigenous botanical ingredients and ancient healing traditions of Southeast Asia. Our pools, fitness facilities, and curated wellness programmes offer a complete sanctuary for body and mind.</p>
+          <a class="feature-link" href="#">DISCOVER WELLNESS</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCES -->
+    <section class="experiences-section reveal">
+      <div class="exp-header">
+        <p class="exp-eyebrow">EXPLORE</p>
+        <h2 class="exp-title">Resort Experiences</h2>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="img-dining exp-card-img photo-ph"><span></span></div>
+          <div class="exp-overlay"><p class="exp-card-title">Dining</p><p class="exp-card-sub">4 RESTAURANTS &amp; BARS</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="img-wellness exp-card-img photo-ph"><span></span></div>
+          <div class="exp-overlay"><p class="exp-card-title">Wellness</p><p class="exp-card-sub">AURIGA SPA</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="img-culture exp-card-img photo-ph"><span></span></div>
+          <div class="exp-overlay"><p class="exp-card-title">Culture</p><p class="exp-card-sub">ARTS &amp; HERITAGE</p></div>
+        </div>
+        <div class="exp-card">
+          <div class="img-events exp-card-img photo-ph"><span></span></div>
+          <div class="exp-overlay"><p class="exp-card-title">Weddings &amp; Events</p><p class="exp-card-sub">UNIQUE VENUES</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER -->
+    <section class="full-banner reveal">
+      <div>
+        <p class="full-banner-eyebrow">SENTOSA ISLAND &middot; SINGAPORE</p>
+        <h2 class="full-banner-title">Begin Your Stay</h2>
+        <a class="btn-white" href="#">RESERVE A ROOM</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="cap-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div>
+            <p class="footer-logo">CAPELLA HOTELS &amp; RESORTS</p>
+            <p class="footer-tagline">A collection of exceptional hotels and resorts for the discerning traveller. Each property reflects its unique sense of place, culture and history.</p>
+          </div>
+          <div>
+            <p class="footer-col-title">Explore</p>
+            <nav class="footer-links">
+              <a href="#">Destinations</a>
+              <a href="#">Experiences</a>
+              <a href="#">Accommodation</a>
+              <a href="#">Dining</a>
+              <a href="#">Wellness</a>
+            </nav>
+          </div>
+          <div>
+            <p class="footer-col-title">Plan</p>
+            <nav class="footer-links">
+              <a href="#">Book Your Stay</a>
+              <a href="#">Weddings &amp; Events</a>
+              <a href="#">Offers &amp; Packages</a>
+              <a href="#">Gift Cards</a>
+              <a href="#">Group Bookings</a>
+            </nav>
+          </div>
+          <div>
+            <p class="footer-col-title">Contact</p>
+            <nav class="footer-links">
+              <a href="#">+65 6377 8888</a>
+              <a href="#">reservations@capellasingapore.com</a>
+              <a href="#">1 The Knolls, Sentosa Island</a>
+              <a href="#">Singapore 098297</a>
+              <a href="#">Get Directions</a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="footer-copy">&copy; 2024 Capella Hotel Group. All rights reserved.</p>
+          <nav class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms &amp; Conditions</a>
+            <a href="#">Cookie Settings</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function scrollToNext() {
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: "smooth"
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
